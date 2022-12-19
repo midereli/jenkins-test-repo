@@ -1,0 +1,8 @@
+/Game/GameName01/Content/Developers/designer01/SuneForestPrototype/ForestPrototype_Persistent.umap:selected
+/Game/GameName01/Content/Developers/designer01/SuneMegaForestPrototype/MegaForestPrototype_Persistent.umap:selected
+/Game/GameName01/Content/Developers/dev01/AssetShowcaseLevel/LVL_ShowCase_Persistent.umap:selected
+/Game/GameName01/Content/Developers/dev01/MarketingScreenshots_DemoLevel/Scene01/Screenshot01/Scene01_Screenshot01_Persistent.umap
+/Game/GameName01/Content/Developers/dev01/MarketingScreenshots_DemoLevel/Scene01/Screenshot02/Scene01_Screenshot02_Persistent.umap
+/Game/GameName01/Content/Developers/dev01/MarketingScreenshots_DemoLevel/Scene01/Screenshot03/Scene01_Screenshot03_Persistent.umap
+/Game/GameName01/Content/GameName01/Maps/DemoLevel/DemoLevel_Barren_Persistent.umap
+/Game/GameName01/Content/GameName01/Maps/ShowcaseLevel/LVL_ShowCase_Persistent.umap
