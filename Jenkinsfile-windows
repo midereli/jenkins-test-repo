@@ -55,7 +55,8 @@ properties([
           sandbox: false, 
           script: '''
             List maps = []
-            maps = u.toURL("https://storage.googleapis.com/jenkins-custom-builds/maps_to_cook.txt").readLines()
+            maps = new URL("https://storage.googleapis.com/jenkins-custom-builds/maps_to_cook.txt").readLines()
+            // new URL('https://storage.googleapis.com/jenkins-custom-builds/maps_to_cook.txt').readLines()
             maps.add("cmd /c cd".execute().text)
             new File("C:/Users/Merih/AppData/Local/Jenkins/.jenkins/workspace/multibranch_test_main/maps_to_cook.txt").eachLine { line -> maps.add(line)}
             return maps
