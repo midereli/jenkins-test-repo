@@ -55,6 +55,7 @@ properties([
           sandbox: false, 
           script: '''
             List maps = []
+            maps = u.toURL().readLines()
             maps.add("cmd /c cd".execute().text)
             new File("C:/Users/Merih/AppData/Local/Jenkins/.jenkins/workspace/multibranch_test_main/maps_to_cook.txt").eachLine { line -> maps.add(line)}
             return maps
@@ -92,7 +93,7 @@ pipeline {
         // bat 'ini-customizer ${REMOVE_DEV_FOLDERS} ${MAPS_TO_COOK} ${MERIH}'
         // echo "ini-customizer ${params.PERSON} ${params.TOGGLE} ${params.CHOICE} ${params.PASSWORD}"
         // bat "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS} ${params.MAPS_TO_COOK}"
-        echo "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS_KEY} -inipath Game/Providence/Config/DefaultGame.ini -mapstocook ${params.MAPS_TO_COOK}"
+        bat "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS_KEY} -inipath Game/Providence/Config/DefaultGame.ini -mapstocook ${params.MAPS_TO_COOK}"
         // ini-customizer -ini Game/Providence/Config/DefaultGame.ini -maps_to_cook SomeCoolLevel.umap,\\Game\\GameLevel.map,Woop.woop -removedevfolderskey=true
       }
     }
