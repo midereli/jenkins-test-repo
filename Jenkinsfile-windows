@@ -75,8 +75,6 @@ pipeline {
     CREDENTIALS_ID = 'google-storage-test'
     BUCKET = 'testo-jenkins-build-bucket'
     PATTERN = '*.class'
-    // JENKINS_API_USER = credentials('jenkins_api_user')
-    // JENKINS_API_TOKEN = credentials('jenkins_api_token')
   }
   stages {
     stage('Compile') {
@@ -86,18 +84,18 @@ pipeline {
         bat 'java HelloWorld'
       }
     }
-    stage('edit ini test') {
+    stage('Customize DefaultGame.ini') {
       steps {
-        // bat 'ini-customizer ${REMOVE_DEV_FOLDERS} ${MAPS_TO_COOK} ${MERIH}'
-        // echo "ini-customizer ${params.PERSON} ${params.TOGGLE} ${params.CHOICE} ${params.PASSWORD}"
-        // bat "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS} ${params.MAPS_TO_COOK}"
+        echo 'Executing with -findmaps to find Persistent.umap suffixed files under Game/Providence/ and writing them to maps_to_cook.txt file.'
+        bat "ini-customizer -findmaps"
+        echo "Uploading maps_to_cook.txt file to S3."
+        bat "aws s3 cp maps_to_cook.txt s3://jenkins-custom-builds/maps_to_cook.txt --profile jenkins_s3_user"
+        echo 'Editing Game/Providence/Config/DefaultGame.ini file.'
         bat "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS_KEY} -inipath Game/Providence/Config/DefaultGame.ini -mapstocook ${params.MAPS_TO_COOK}"
-        // ini-customizer -ini Game/Providence/Config/DefaultGame.ini -maps_to_cook SomeCoolLevel.umap,\\Game\\GameLevel.map,Woop.woop -removedevfolderskey=true
       }
     }
     stage('Send notification to Slack') {
       steps {
-        // slackSend color: "#439FE0", message: "Build info: ${env.JOB_NAME} ${env.BUILD_NUMBER} <${env.BUILD_URL}|Open>"
         echo 'send notification to slack commented for this step'
       }
     }
@@ -105,19 +103,14 @@ pipeline {
   post {
     always {
       echo 'pipeline always echoes this message'
-      // powershell 'echo \"$env:JENKINS_API_USER:$env:JENKINS_API_TOKEN\"'
-      // bat 'powershell Invoke-WebRequest -Uri \"%BUILD_URL%consoleText\" -Headers @{ Authorization = \\"Basic \\"+ [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(\\"%JENKINS_API_USER%:%JENKINS_API_TOKEN%\\")) } -OutFile build_%BUILD_NUMBER%.log'
     }
     success {
       echo 'pipeline finished successfully'
     }
     failure {
-      // slackSend color: "#c91a1a", message: "ERROR: Pipeline failed."
-      // slackUploadFile filePath: "build_log_*.txt", initialComment: "See attached build logs for details."
       echo 'job failed'
     }
     cleanup {
-      // powershell 'del build_log_$env:BUILD_NUMBER.txt'
       powershell 'echo cleanup'
     }
   }
