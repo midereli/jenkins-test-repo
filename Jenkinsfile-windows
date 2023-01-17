@@ -90,7 +90,7 @@ pipeline {
         bat "ini-customizer -findmaps"
         echo 'Uploading maps_to_cook.txt file to S3.'
         bat "path"
-        bat "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe --version"
+        bat "'C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe' --version"
         bat "aws s3 cp maps_to_cook.txt s3://jenkins-custom-builds/maps_to_cook.txt --profile jenkins_s3_user"
         echo 'Editing Game/Providence/Config/DefaultGame.ini file.'
         bat "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS_KEY} -inipath Game/Providence/Config/DefaultGame.ini -mapstocook ${params.MAPS_TO_COOK}"
