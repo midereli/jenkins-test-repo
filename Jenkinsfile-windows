@@ -90,7 +90,7 @@ pipeline {
     }
     stage('Customize DefaultGame.ini') {
       steps {
-        bat 'curl --request POST --data \"{\\"messages\\":[\\"My First Message fail\\",\\"My Second Message fail\\"],\\"url\\":\\"http://jenkins.han-dynastystudios.com:8080/job/Han_Binaries_Swarm_Tests/job/Dev-Main/review/build\\",\\"status\\":\\"fail\\"}\" ${params.update}'
+        bat "curl --request POST --data \"{\"messages\":[\"My First Message fail\",\"My Second Message fail\"],\"url\":\"http://jenkins.han-dynastystudios.com:8080/job/Han_Binaries_Swarm_Tests/job/Dev-Main/review/build\",\"status\":\"fail\"}\" ${params.update}"
         echo 'Executing with -findmaps to find Persistent.umap suffixed files under Game/Providence/ and writing them to maps_to_cook.txt file.'
         // bat "ini-customizer -findmaps"
         echo 'Uploading maps_to_cook.txt file to S3.'
