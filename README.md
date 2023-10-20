@@ -5,3 +5,4 @@ nothing more, nothing less
 adding some text to test it
 commit message test
 birlikte test ederken yaptigim degisiklik
+ktbsiz commit mesaji icin
