@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('deploy to prod') {
             steps {
-                echo 'Hello World'
+                echo 'Hello World ikinci task'
             }
         }
     }
