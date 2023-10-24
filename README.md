@@ -9,3 +9,5 @@ commit message test
 birlikte test ederken yaptigim degisiklik
 
 test go
+
+demo prisync
