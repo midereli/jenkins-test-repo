@@ -9,7 +9,7 @@ properties([
         'Test',
         'DebugGame'
       ],
-      description: 'hede hödö',
+      description: 'hehe hede hodo',
       name: 'BUILD_CONFIGURATION'
     ),
     string(
