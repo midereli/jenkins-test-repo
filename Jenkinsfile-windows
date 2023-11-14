@@ -65,12 +65,12 @@ pipeline {
     }
     stage('Customize DefaultGame.ini') {
       steps {
-        bat "curl --request POST --data \"{\\\"messages\\\":[\\\"Test failed.\\\",\\\"Jenkins job name: ${env.BUILD_DISPLAY_NAME}\\\",\\\"Jenkins build number: ${env.BUILD_NUMBER}\\\",\\\"${env.BUILD_URL}\\\"],\\\"url\\\":\\\"http://jenkins.han-dynastystudios.com:8080/job/Han_Binaries_Swarm_Tests/job/Dev-Main/review/build\\\",\\\"status\\\":\\\"fail\\\"}\" ${params.update}"
+        // bat "curl --request POST --data \"{\\\"messages\\\":[\\\"Test failed.\\\",\\\"Jenkins job name: ${env.BUILD_DISPLAY_NAME}\\\",\\\"Jenkins build number: ${env.BUILD_NUMBER}\\\",\\\"${env.BUILD_URL}\\\"],\\\"url\\\":\\\"http://jenkins.han-dynastystudios.com:8080/job/Han_Binaries_Swarm_Tests/job/Dev-Main/review/build\\\",\\\"status\\\":\\\"fail\\\"}\" ${params.update}"
         echo 'Executing with -findmaps to find Persistent.umap suffixed files under Game/Providence/ and writing them to maps_to_cook.txt file.'
         // bat "ini-customizer -findmaps"
         echo 'Uploading maps_to_cook.txt file to S3.'
         // bat "path"
-        bat "\"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe\" --version"
+        // bat "\"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe\" --version"
         // bat "aws s3 cp maps_to_cook.txt s3://jenkins-custom-builds/maps_to_cook.txt --profile jenkins_s3_user"
         echo 'Editing Game/Providence/Config/DefaultGame.ini file.'
         // bat "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS_KEY} -inipath Game/Providence/Config/DefaultGame.ini -mapstocook ${params.MAPS_TO_COOK}"
