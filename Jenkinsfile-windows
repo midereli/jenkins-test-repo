@@ -9,7 +9,7 @@ properties([
         'Test',
         'DebugGame'
       ],
-      description: '''Development = This configuration is equivalent to Release. Unreal Editor uses the Development configuration by default. Compiling your project using the Development configuration enables you to see code changes made to your project reflected in the editor.\n\nShipping =  This is the configuration for optimal performance and shipping your game. This configuration strips out console commands, stats, and profiling tools.\n\nTest =  This configuration is the Shipping configuration, but with some console commands, stats, and profiling tools enabled.\n\nDebugGame = This configuration builds the engine as optimized, but leaves the game code debuggable. This configuration is ideal for debugging only game modules.''',
+      description: 'hede hödö',
       name: 'BUILD_CONFIGURATION'
     ),
     string(
@@ -25,10 +25,6 @@ properties([
       defaultValue: 'D:\\Jenkins\\Archive',
       description: 'The path where builds will be archive in the Jenkins agent.',
       name: 'PATH_TO_ARCHIVE'
-    ),
-    string(
-      description: 'update',
-      name: 'update'
     ),
     string(
       defaultValue: 'D:\\Jenkins\\temp',
