@@ -40,31 +40,6 @@ properties([
       description: 'If set to be fast Binaries and Intermediate folders won\'t be deleted. By default this is FALSE as we want to have a clean build.',
       name: 'FAST_BUILD'
     ),
-    [
-      $class: 'ChoiceParameter', 
-      choiceType: 'PT_CHECKBOX',
-      description: 'Select the maps to be cooked.',
-      filterLength: 1,
-      filterable: false,
-      name: 'MAPS_TO_COOK',
-      script: [
-        $class: 'GroovyScript',
-        fallbackScript: [
-          classpath: [], 
-          sandbox: false, 
-          script: 'return ["ERROR"]'
-        ],
-        script: [
-          classpath: [], 
-          sandbox: false, 
-          script: '''
-            List maps = []
-            new URL("https://jenkins-custom-builds.s3.eu-west-1.amazonaws.com/maps_to_cook.txt").eachLine { line -> maps.add(line)}
-            return maps
-          '''.stripIndent()
-        ]
-      ]
-    ],
     booleanParam (
       name: 'REMOVE_DEV_FOLDERS_KEY',
       defaultValue: false,
