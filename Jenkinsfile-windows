@@ -9,7 +9,7 @@ properties([
         'Test',
         'DebugGame'
       ],
-      description: '''Development = This configuration is equivalent to Release. Unreal Editor uses the Development configuration by default. Compiling your project using the Development configuration enables you to see code changes made to your project reflected in the editor.\n\nShipping =  This is the configuration for optimal performance and shipping your game. This configuration strips out console commands, stats, and profiling tools.\n\nTest =  This configuration is the Shipping configuration, but with some console commands, stats, and profiling tools enabled.\n\nDebugGame = This configuration builds the engine as optimized, but leaves the game code debuggable. This configuration is ideal for debugging only game modules.''',
+      description: 'hehe hede hodo',
       name: 'BUILD_CONFIGURATION'
     ),
     string(
@@ -27,10 +27,6 @@ properties([
       name: 'PATH_TO_ARCHIVE'
     ),
     string(
-      description: 'update',
-      name: 'update'
-    ),
-    string(
       defaultValue: 'D:\\Jenkins\\temp',
       description: 'The path where temp builds will be generated. From this folder they will be compressed and moved to the Archive folder',
       name: 'PATH_TO_TEMP'
@@ -40,31 +36,6 @@ properties([
       description: 'If set to be fast Binaries and Intermediate folders won\'t be deleted. By default this is FALSE as we want to have a clean build.',
       name: 'FAST_BUILD'
     ),
-    [
-      $class: 'ChoiceParameter', 
-      choiceType: 'PT_CHECKBOX',
-      description: 'Select the maps to be cooked.',
-      filterLength: 1,
-      filterable: false,
-      name: 'MAPS_TO_COOK',
-      script: [
-        $class: 'GroovyScript',
-        fallbackScript: [
-          classpath: [], 
-          sandbox: false, 
-          script: 'return ["ERROR"]'
-        ],
-        script: [
-          classpath: [], 
-          sandbox: false, 
-          script: '''
-            List maps = []
-            new URL("https://jenkins-custom-builds.s3.eu-west-1.amazonaws.com/maps_to_cook.txt").eachLine { line -> maps.add(line)}
-            return maps
-          '''.stripIndent()
-        ]
-      ]
-    ],
     booleanParam (
       name: 'REMOVE_DEV_FOLDERS_KEY',
       defaultValue: false,
@@ -90,12 +61,12 @@ pipeline {
     }
     stage('Customize DefaultGame.ini') {
       steps {
-        bat "curl --request POST --data \"{\\\"messages\\\":[\\\"Test failed.\\\",\\\"Jenkins job name: ${env.BUILD_DISPLAY_NAME}\\\",\\\"Jenkins build number: ${env.BUILD_NUMBER}\\\",\\\"${env.BUILD_URL}\\\"],\\\"url\\\":\\\"http://jenkins.han-dynastystudios.com:8080/job/Han_Binaries_Swarm_Tests/job/Dev-Main/review/build\\\",\\\"status\\\":\\\"fail\\\"}\" ${params.update}"
+        // bat "curl --request POST --data \"{\\\"messages\\\":[\\\"Test failed.\\\",\\\"Jenkins job name: ${env.BUILD_DISPLAY_NAME}\\\",\\\"Jenkins build number: ${env.BUILD_NUMBER}\\\",\\\"${env.BUILD_URL}\\\"],\\\"url\\\":\\\"http://jenkins.han-dynastystudios.com:8080/job/Han_Binaries_Swarm_Tests/job/Dev-Main/review/build\\\",\\\"status\\\":\\\"fail\\\"}\" ${params.update}"
         echo 'Executing with -findmaps to find Persistent.umap suffixed files under Game/Providence/ and writing them to maps_to_cook.txt file.'
         // bat "ini-customizer -findmaps"
         echo 'Uploading maps_to_cook.txt file to S3.'
         // bat "path"
-        bat "\"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe\" --version"
+        // bat "\"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe\" --version"
         // bat "aws s3 cp maps_to_cook.txt s3://jenkins-custom-builds/maps_to_cook.txt --profile jenkins_s3_user"
         echo 'Editing Game/Providence/Config/DefaultGame.ini file.'
         // bat "ini-customizer -removedevfolderskey=${params.REMOVE_DEV_FOLDERS_KEY} -inipath Game/Providence/Config/DefaultGame.ini -mapstocook ${params.MAPS_TO_COOK}"
